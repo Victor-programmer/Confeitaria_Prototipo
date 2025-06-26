@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pequenas Delícias Gourmet | Bolos Artesanais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e67e7e;
+            --secondary: #f8d7d7;
+            --dark: #2c2c2c;
+            --light: #fff9f9;
+            --accent: #ffb6b6;
+            --success: #88c288;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Menu Lateral */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--light);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .side-menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .menu-header .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .close-menu {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .menu-links {
+            list-style: none;
+        }
+
+        .menu-links li {
+            margin-bottom: 15px;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            display: block;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+
+        .menu-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Header */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-icons a {
+            color: var(--dark);
+            margin-left: 20px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .header-icons a span {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary);
+            color: var(--light);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: var(--light);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: var(--light);
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Destaques */
+        .highlights {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .highlight-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .highlight-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .highlight-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Cardápio de Bolos */
+        .menu {
+            padding: 80px 5%;
+            background-color: var(--secondary);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-info {
+            padding: 20px;
+        }
+
+        .menu-item-category {
+            color: var(--primary);
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-item-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--dark);
+            color: var(--light);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        /* Sobre */
+        .about {
+            padding: 80px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 15px 15px 0 var(--accent);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            padding: 30px;
+        }
+
+        .testimonial-text {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 80px 5%;
+            background-color: var(--primary);
+            color: var(--light);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background-color: var(--dark);
+            color: var(--light);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #222;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Modal Carrinho */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--light);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-header h3 {
+            font-size: 20px;
+        }
+
+        .close-cart {
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: var(--primary);
+        }
+
+        .cart-items {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background-color: var(--gray);
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .remove-item {
+            color: #777;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .remove-item:hover {
+            color: var(--primary);
+        }
+
+        .cart-total {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total-row:last-child {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: var(--success);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #6daa6d;
+        }
+
+        /* Modal de Pagamento */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .payment-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .payment-container {
+            background-color: var(--light);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(-50px);
+            transition: transform 0.3s;
+        }
+
+        .payment-modal.active .payment-container {
+            transform: translateY(0);
+        }
+
+        .payment-header {
+            padding: 20px;
+            background-color: var(--primary);
+            color: var(--light);
+            text-align: center;
+        }
+
+        .payment-header h3 {
+            font-size: 24px;
+        }
+
+        .payment-body {
+            padding: 30px;
+        }
+
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: rgba(230, 126, 126, 0.1);
+        }
+
+        .payment-method input {
+            margin-right: 15px;
+        }
+
+        .payment-method i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #555;
+        }
+
+        .payment-method span {
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .payment-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .payment-actions .btn {
+            padding: 12px 25px;
+        }
+
+        .btn-secondary {
+            background-color: #777;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        /* Gerenciamento de Pedidos */
+        .order-management {
+            padding: 80px 5%;
+            background-color: var(--light);
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        .order-table th, .order-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-table th {
+            background-color: var(--gray);
+            font-weight: 600;
+        }
+
+        .order-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .action-btn.view {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .action-btn.view:hover {
+            background-color: var(--accent);
+        }
+
+        .action-btn.cancel {
+            background-color: #f8d7da;
+            color: #721c24;
+            margin-left: 5px;
+        }
+
+        .action-btn.cancel:hover {
+            background-color: #f5c6cb;
+        }
+
+        /* Responsivo */
+       @media (max-width: 1200px) {
+    .highlight-cards, .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .about {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .about-image {
+        order: -1;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .side-menu {
+        width: 100%;
+        left: -100%;
+    }
+    
+    .main-header {
+        padding: 15px 20px;
+    }
+    
+    .hero {
+        height: 60vh;
+        min-height: 400px;
+        padding: 0 20px;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .section-title h2 {
+        font-size: 28px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        border-radius: 30px;
+        margin-bottom: 10px;
+    }
+    
+    .newsletter-form button {
+        border-radius: 30px;
+        width: 100%;
+    }
+    
+    .cart-modal {
+        width: 100%;
+    }
+    
+    .order-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .payment-container {
+        width: 95%;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        height: 50vh;
+        min-height: 300px;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+    }
+    
+    .highlight-cards, .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-item-image {
+        height: 200px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-col {
+        margin-bottom: 20px;
+    }
+    
+    .payment-method span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero h1 {
+        font-size: 24px;
+    }
+    
+    .hero p {
+        font-size: 14px;
+    }
+    
+    .header-icons a {
+        margin-left: 15px;
+        font-size: 16px;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+    }
+    
+    .cart-item-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    
+    .payment-method {
+        padding: 10px;
+    }
+    
+    .payment-method i {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+}
+        
+    </style>
+</head>
+<body>
+    <!-- Menu Lateral -->
+    <div class="side-menu">
+        <div class="menu-header">
+            <div class="logo">Pequenas Delícias</div>
+            <div class="close-menu">&times;</div>
+        </div>
+        <ul class="menu-links">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Bolos</a></li>
+            <li><a href="#">Doces</a></li>
+            <li><a href="#">Presentes</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        Frete grátis para pedidos acima de R$ 150,00 | Entrega em até 48h
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="header-icons">
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="fas fa-user"></i></a>
+            <a href="#" id="cart-icon"><i class="fas fa-shopping-cart"></i><span>3</span></a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bolos Feitos com Paixão</h1>
+            <p>Descubra nossas criações artesanais, feitas com ingredientes selecionados e muito carinho.</p>
+            <a href="#" class="btn">Ver Cardápio</a>
+        </div>
+    </section>
+
+    <!-- Destaques -->
+    <section class="highlights">
+        <div class="section-title">
+            <h2>Por Que Escolher Nossos Bolos?</h2>
+            <p>Nossas delícias são preparadas com os melhores ingredientes e técnicas artesanais.</p>
+        </div>
+        <div class="highlight-cards">
+            <div class="highlight-card">
+                <i class="fas fa-heart"></i>
+                <h3>Feito com Amor</h3>
+                <p>Cada bolo é preparado com dedicação e cuidado artesanal.</p>
+            </div>
+            <div class="highlight-card">
+                <i class="fas fa-leaf"></i>
+                <h3>Ingredientes Frescos</h3>
+                <p>Utilizamos apenas ingredientes naturais e de alta qualidade.</p>
+            </div>
+            <div class="highlight-card">
+                <i class="fas fa-truck"></i>
+                <h3>Entrega Rápida</h3>
+                <p>Entregamos em até 48h na região metropolitana.</p>
+            </div>
+            <div class="highlight-card">
+                <i class="fas fa-gift"></i>
+                <h3>Embalagem Premium</h3>
+                <p>Todos os nossos produtos são entregues em embalagens especiais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cardápio de Bolos -->
+    <section class="menu">
+        <div class="section-title">
+            <h2>Nosso Cardápio</h2>
+            <p>Conheça nossas delícias cuidadosamente preparadas para tornar seus momentos mais especiais.</p>
+        </div>
+        <div class="menu-grid">
+            <!-- Produto 1 -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Chocolate">
+                </div>
+                <div class="menu-item-info">
+                    <div class="menu-item-category">Bolo Clássico</div>
+                    <h3 class="menu-item-title">Chocolate Belga</h3>
+                    <div class="menu-item-price">
+                        <div>
+                            <span class="price">R$ 89,90</span>
+                            <span class="old-price">R$ 99,90</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Morango">
+                </div>
+                <div class="menu-item-info">
+                    <div class="menu-item-category">Bolo Frutado</div>
+                    <h3 class="menu-item-title">Morangos Frescos</h3>
+                    <div class="menu-item-price">
+                        <div>
+                            <span class="price">R$ 79,90</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Red Velvet">
+                </div>
+                <div class="menu-item-info">
+                    <div class="menu-item-category">Bolo Premium</div>
+                    <h3 class="menu-item-title">Red Velvet</h3>
+                    <div class="menu-item-price">
+                        <div>
+                            <span class="price">R$ 109,90</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Limão">
+                </div>
+                <div class="menu-item-info">
+                    <div class="menu-item-category">Bolo Cítrico</div>
+                    <h3 class="menu-item-title">Limão Siciliano</h3>
+                    <div class="menu-item-price">
+                        <div>
+                            <span class="price">R$ 69,90</span>
+                            <span class="old-price">R$ 79,90</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 5 -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Cenoura">
+                </div>
+                <div class="menu-item-info">
+                    <div class="menu-item-category">Bolo Tradicional</div>
+                    <h3 class="menu-item-title">Cenoura com Chocolate</h3>
+                    <div class="menu-item-price">
+                        <div>
+                            <span class="price">R$ 59,90</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 6 -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Baunilha">
+                </div>
+                <div class="menu-item-info">
+                    <div class="menu-item-category">Bolo Clássico</div>
+                    <h3 class="menu-item-title">Baunilha com Frutas</h3>
+                    <div class="menu-item-price">
+                        <div>
+                            <span class="price">R$ 89,90</span>
+                            <span class="old-price">R$ 119,90</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="about">
+        <div class="about-content">
+            <h2>Sobre a Pequenas Delícias</h2>
+            <p>Fundada em 2015, nossa confeitaria nasceu do amor pela arte da confeitaria e do desejo de criar momentos especiais através de sabores únicos.</p>
+            <p>Nossa equipe de confeiteiros combina técnicas tradicionais com inovação para criar bolos que são verdadeiras obras de arte comestíveis. Cada criação é feita sob medida para atender aos gostos e necessidades de nossos clientes.</p>
+            <p>Comprometidos com a qualidade, utilizamos apenas os melhores ingredientes, muitos deles importados e orgânicos, garantindo um sabor incomparável em cada fatia.</p>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Confeiteira preparando bolo">
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>O Que Dizem Nossos Clientes</h2>
+            <p>Depoimentos de quem já experimentou nossas delícias</p>
+        </div>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <p class="testimonial-text">"O bolo de chocolate belga foi o destaque da festa do meu filho! Todos elogiaram o sabor incrível e a apresentação linda. Superou todas as expectativas!"</p>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana Silva">
+                    </div>
+                    <div class="author-info">
+                        <h4>Ana Silva</h4>
+                        <p>Mãe do João</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Assine Nossa Newsletter</h2>
+        <p>Receba novidades, promoções exclusivas e dicas de confeitaria diretamente no seu e-mail</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Seu melhor e-mail">
+            <button type="submit">Assinar</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Pequenas Delícias</h3>
+                <p>Especializados em bolos artesanais gourmet, criados com ingredientes premium e muito amor.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Links Úteis</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Nossos Bolos</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Políticas</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Política de Entrega</a></li>
+                    <li><a href="#">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua dos Sabores, 123 - São Paulo/SP</p>
+                <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
+                <p><i class="fas fa-envelope"></i> contato@pequenasdelicias.com</p>
+                <p><i class="fas fa-clock"></i> Seg-Sex: 9h-18h | Sáb: 9h-13h</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Pequenas Delícias Gourmet. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Carrinho Modal -->
+    <div class="cart-modal">
+        <div class="cart-header">
+            <h3>Seu Carrinho (3)</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Item 1 -->
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Chocolate Belga">
+                </div>
+                <div class="cart-item-details">
+                    <h4 class="cart-item-title">Bolo de Chocolate Belga</h4>
+                    <div class="cart-item-price">R$ 89,90</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button class="quantity-btn">+</button>
+                        <span class="remove-item">Remover</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Red Velvet Premium">
+                </div>
+                <div class="cart-item-details">
+                    <h4 class="cart-item-title">Red Velvet Premium</h4>
+                    <div class="cart-item-price">R$ 109,90</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button class="quantity-btn">+</button>
+                        <span class="remove-item">Remover</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bolo de Limão Siciliano">
+                </div>
+                <div class="cart-item-details">
+                    <h4 class="cart-item-title">Bolo de Limão Siciliano</h4>
+                    <div class="cart-item-price">R$ 69,90</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button class="quantity-btn">+</button>
+                        <span class="remove-item">Remover</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-total">
+            <div class="total-row">
+                <span>Subtotal</span>
+                <span>R$ 269,70</span>
+            </div>
+            <div class="total-row">
+                <span>Frete</span>
+                <span>R$ 15,00</span>
+            </div>
+            <div class="total-row">
+                <span>Total</span>
+                <span>R$ 284,70</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Pagamento -->
+    <div class="payment-modal">
+        <div class="payment-container">
+            <div class="payment-header">
+                <h3>Finalizar Compra</h3>
+            </div>
+            <div class="payment-body">
+                <h4>Informações de Entrega</h4>
+                <div class="form-group">
+                    <label for="full-name">Nome Completo</label>
+                    <input type="text" id="full-name" placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu e-mail">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" placeholder="Digite seu telefone">
+                </div>
+                <div class="form-group">
+                    <label for="address">Endereço</label>
+                    <input type="text" id="address" placeholder="Digite seu endereço completo">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input type="text" id="city" placeholder="Digite sua cidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">CEP</label>
+                        <input type="text" id="zip" placeholder="Digite seu CEP">
+                    </div>
+                </div>
+
+                <h4>Método de Pagamento</h4>
+                <div class="payment-methods">
+                    <div class="payment-method active">
+                        <input type="radio" name="payment" id="credit-card" checked>
+                        <i class="far fa-credit-card"></i>
+                        <span>Cartão de Crédito</span>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" name="payment" id="pix">
+                        <i class="fas fa-qrcode"></i>
+                        <span>PIX</span>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" name="payment" id="bank-transfer">
+                        <i class="fas fa-university"></i>
+                        <span>Transferência Bancária</span>
+                    </div>
+                </div>
+
+                <div id="credit-card-form">
+                    <div class="form-group">
+                        <label for="card-number">Número do Cartão</label>
+                        <input type="text" id="card-number" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-name">Nome no Cartão</label>
+                            <input type="text" id="card-name" placeholder="Como no cartão">
+                        </div>
+                        <div class="form-group">
+                            <label for="card-expiry">Validade</label>
+                            <input type="text" id="card-expiry" placeholder="MM/AA">
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvv">CVV</label>
+                            <input type="text" id="card-cvv" placeholder="000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-installments">Parcelamento</label>
+                        <select id="card-installments" class="form-control">
+                            <option value="1">1x de R$ 284,70</option>
+                            <option value="2">2x de R$ 142,35</option>
+                            <option value="3">3x de R$ 94,90</option>
+                            <option value="4">4x de R$ 71,18</option>
+                            <option value="5">5x de R$ 56,94</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="payment-actions">
+                    <button class="btn btn-secondary" id="back-to-cart">Voltar ao Carrinho</button>
+                    <button class="btn" id="confirm-payment">Confirmar Pagamento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gerenciamento de Pedidos -->
+    <section class="order-management">
+        <div class="section-title">
+            <h2>Gerenciamento de Pedidos</h2>
+            <p>Acompanhe e gerencie todos os pedidos recebidos</p>
+        </div>
+
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Nº Pedido</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#PDG-2023-001</td>
+                    <td>Ana Silva</td>
+                    <td>15/05/2023</td>
+                    <td>R$ 189,90</td>
+                    <td><span class="status status-completed">Entregue</span></td>
+                    <td>
+                        <button class="action-btn view">Detalhes</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#PDG-2023-002</td>
+                    <td>Carlos Oliveira</td>
+                    <td>16/05/2023</td>
+                    <td>R$ 249,90</td>
+                    <td><span class="status status-processing">Em preparo</span></td>
+                    <td>
+                        <button class="action-btn view">Detalhes</button>
+                        <button class="action-btn cancel">Cancelar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#PDG-2023-003</td>
+                    <td>Mariana Santos</td>
+                    <td>17/05/2023</td>
+                    <td>R$ 159,90</td>
+                    <td><span class="status status-pending">Pagamento pendente</span></td>
+                    <td>
+                        <button class="action-btn view">Detalhes</button>
+                        <button class="action-btn cancel">Cancelar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#PDG-2023-004</td>
+                    <td>Roberto Almeida</td>
+                    <td>18/05/2023</td>
+                    <td>R$ 329,90</td>
+                    <td><span class="status status-processing">Em preparo</span></td>
+                    <td>
+                        <button class="action-btn view">Detalhes</button>
+                        <button class="action-btn cancel">Cancelar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#PDG-2023-005</td>
+                    <td>Juliana Costa</td>
+                    <td>18/05/2023</td>
+                    <td>R$ 119,90</td>
+                    <td><span class="status status-cancelled">Cancelado</span></td>
+                    <td>
+                        <button class="action-btn view">Detalhes</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        // Menu Lateral
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sideMenu = document.querySelector('.side-menu');
+        const closeMenu = document.querySelector('.close-menu');
+
+        menuToggle.addEventListener('click', () => {
+            sideMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            sideMenu.classList.remove('active');
+        });
+
+        // Carrinho
+        const cartIcon = document.getElementById('cart-icon');
+        const cartModal = document.querySelector('.cart-modal');
+        const closeCart = document.querySelector('.close-cart');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const paymentModal = document.querySelector('.payment-modal');
+        const backToCart = document.getElementById('back-to-cart');
+        const confirmPayment = document.getElementById('confirm-payment');
+
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartModal.classList.add('active');
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+        });
+
+        checkoutBtn.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            paymentModal.classList.add('active');
+        });
+
+        backToCart.addEventListener('click', () => {
+            paymentModal.classList.remove('active');
+            cartModal.classList.add('active');
+        });
+
+        confirmPayment.addEventListener('click', () => {
+            alert('Pedido confirmado com sucesso! Obrigado por sua compra.');
+            paymentModal.classList.remove('active');
+        });
+
+        // Fechar modais clicando fora
+        window.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                paymentModal.classList.remove('active');
+            }
+        });
+
+        // Seleção de método de pagamento
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
+
+        // Adicionar ao carrinho
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.menu-item');
+                const productName = productCard.querySelector('.menu-item-title').textContent;
+                const productPrice = productCard.querySelector('.price').textContent;
+                const productImage = productCard.querySelector('.menu-item-image img').src;
+                
+                alert(`${productName} adicionado ao carrinho!\nPreço: ${productPrice}`);
+                
+                // Atualizar contador do carrinho
+                const cartCount = cartIcon.querySelector('span');
+                let count = parseInt(cartCount.textContent);
+                cartCount.textContent = count + 1;
+            });
+        });
+
+        // Slider de depoimentos
+        const testimonials = [
+            {
+                text: `"O bolo de chocolate belga foi o destaque da festa do meu filho! Todos elogiaram o sabor incrível e a apresentação linda. Superou todas as expectativas!"`,
+                author: "Ana Silva",
+                occasion: "Mãe do João",
+                image: "https://randomuser.me/api/portraits/women/32.jpg"
+            },
+            {
+                text: `"Encomendei o Red Velvet para meu aniversário de casamento e foi perfeito! O sabor era equilibrado, nem doce demais nem pouco, e a decoração exatamente como eu havia imaginado."`,
+                author: "Carlos Oliveira",
+                occasion: "Aniversário de Casamento",
+                image: "https://randomuser.me/api/portraits/men/45.jpg"
+            },
+            {
+                text: `"Sou cliente há 3 anos e sempre impressionada com a qualidade e criatividade. O atendimento é personalizado e os bolos chegam sempre impecáveis."`,
+                author: "Mariana Santos",
+                occasion: "Cliente Frequente",
+                image: "https://randomuser.me/api/portraits/women/68.jpg"
+            }
+        ];
+
+        let currentTestimonial = 0;
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+
+        function changeTestimonial() {
+            const testimonial = testimonials[currentTestimonial];
+            testimonialSlider.innerHTML = `
+                <div class="testimonial">
+                    <p class="testimonial-text">${testimonial.text}</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="${testimonial.image}" alt="${testimonial.author}">
+                        </div>
+                        <div class="author-info">
+                            <h4>${testimonial.author}</h4>
+                            <p>${testimonial.occasion}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        }
+
+        // Mudar depoimento a cada 5 segundos
+        setInterval(changeTestimonial, 5000);
+
+        // Fechar menu ao clicar em um link (para mobile)
+const menuLinks = document.querySelectorAll('.menu-links a');
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+    });
+});
+
+// Fechar modais ao pressionar ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        sideMenu.classList.remove('active');
+        cartModal.classList.remove('active');
+        paymentModal.classList.remove('active');
+    }
+});
+
+// Impedir que o body role quando um modal estiver aberto
+function toggleBodyScroll(enable) {
+    document.body.style.overflow = enable ? 'auto' : 'hidden';
+}
+
+// Atualizar os event listeners para controlar o scroll do body
+menuToggle.addEventListener('click', () => {
+    sideMenu.classList.add('active');
+    toggleBodyScroll(false);
+});
+
+closeMenu.addEventListener('click', () => {
+    sideMenu.classList.remove('active');
+    toggleBodyScroll(true);
+});
+
+cartIcon.addEventListener('click', (e) => {
+    e.preventDefault();
+    cartModal.classList.add('active');
+    toggleBodyScroll(false);
+});
+
+closeCart.addEventListener('click', () => {
+    cartModal.classList.remove('active');
+    toggleBodyScroll(true);
+});
+
+checkoutBtn.addEventListener('click', () => {
+    cartModal.classList.remove('active');
+    paymentModal.classList.add('active');
+});
+
+backToCart.addEventListener('click', () => {
+    paymentModal.classList.remove('active');
+    cartModal.classList.add('active');
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === paymentModal) {
+        paymentModal.classList.remove('active');
+        toggleBodyScroll(true);
+    }
+});
+    </script>
+</body>
+</html>
