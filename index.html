@@ -701,134 +701,145 @@
 
         /* Modal de Pagamento */
         .payment-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start; /* Alterado de center para flex-start */
+    justify-content: center;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    overflow-y: auto; /* Permite rolagem no modal */
+    padding: 20px 0; /* Espaço para rolagem */
+}
 
-        .payment-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
+.payment-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
 
-        .payment-container {
-            background-color: var(--light);
-            width: 90%;
-            max-width: 600px;
-            border-radius: 10px;
-            overflow: hidden;
-            transform: translateY(-50px);
-            transition: transform 0.3s;
-        }
+.payment-container {
+    background-color: var(--light);
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    transform: translateY(-50px);
+    transition: transform 0.3s;
+    margin: 20px 0; /* Espaço para rolagem */
+    max-height: 90vh; /* Limita a altura máxima */
+    overflow-y: auto; /* Permite rolagem dentro do container */
+}
 
-        .payment-modal.active .payment-container {
-            transform: translateY(0);
-        }
+.payment-modal.active .payment-container {
+    transform: translateY(0);
+}
 
-        .payment-header {
-            padding: 20px;
-            background-color: var(--primary);
-            color: var(--light);
-            text-align: center;
-        }
+.payment-header {
+    padding: 20px;
+    background-color: var(--primary);
+    color: var(--light);
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
 
-        .payment-header h3 {
-            font-size: 24px;
-        }
+.payment-header h3 {
+    font-size: 24px;
+}
 
-        .payment-body {
-            padding: 30px;
-        }
+.payment-body {
+    padding: 30px;
+}
 
-        .payment-methods {
-            margin-bottom: 30px;
-        }
+/* Restante do CSS permanece igual */
+.payment-methods {
+    margin-bottom: 30px;
+}
 
-        .payment-method {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+.payment-method {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
 
-        .payment-method:hover {
-            border-color: var(--primary);
-        }
+.payment-method:hover {
+    border-color: var(--primary);
+}
 
-        .payment-method.active {
-            border-color: var(--primary);
-            background-color: rgba(230, 126, 126, 0.1);
-        }
+.payment-method.active {
+    border-color: var(--primary);
+    background-color: rgba(230, 126, 126, 0.1);
+}
 
-        .payment-method input {
-            margin-right: 15px;
-        }
+.payment-method input {
+    margin-right: 15px;
+}
 
-        .payment-method i {
-            font-size: 24px;
-            margin-right: 15px;
-            color: #555;
-        }
+.payment-method i {
+    font-size: 24px;
+    margin-right: 15px;
+    color: #555;
+}
 
-        .payment-method span {
-            font-weight: 500;
-        }
+.payment-method span {
+    font-weight: 500;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+.form-group {
+    margin-bottom: 20px;
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        .payment-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
+.payment-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
 
-        .payment-actions .btn {
-            padding: 12px 25px;
-        }
+.payment-actions .btn {
+    padding: 12px 25px;
+}
 
-        .btn-secondary {
-            background-color: #777;
-        }
+.btn-secondary {
+    background-color: #777;
+}
 
-        .btn-secondary:hover {
-            background-color: #555;
-        }
+.btn-secondary:hover {
+    background-color: #555;
+}
+
+/* Media Queries para telas pequenas */
 
         /* Gerenciamento de Pedidos */
         .order-management {
@@ -995,6 +1006,29 @@
     .form-row {
         grid-template-columns: 1fr;
     }
+    .payment-container {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .payment-body {
+        padding: 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .payment-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .payment-actions .btn {
+        width: 100%;
+    }
+
 }
 
 @media (max-width: 576px) {
@@ -1030,6 +1064,7 @@
     .payment-method span {
         font-size: 14px;
     }
+   
 }
 
 @media (max-width: 400px) {
@@ -1056,13 +1091,19 @@
         margin-bottom: 10px;
     }
     
+    
     .payment-method {
-        padding: 10px;
+        padding: 12px;
+        font-size: 14px;
     }
     
     .payment-method i {
         font-size: 20px;
         margin-right: 10px;
+    }
+    
+    .form-group input {
+        padding: 10px 12px;
     }
 }
         
